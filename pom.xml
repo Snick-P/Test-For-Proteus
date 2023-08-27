@@ -19,7 +19,9 @@
         <allure.version>2.23.0</allure.version>
         <allure-maven.version>2.12.0</allure-maven.version>
         <allure-selenide.version>2.23.0</allure-selenide.version>
-        <datafaker.version>2.0.1</datafaker.version>
+        <maven-surefire-plugin.version>3.1.2</maven-surefire-plugin.version>
+
+        <testngXML>testng-parameters.xml</testngXML>
     </properties>
 
     <dependencies>
@@ -63,16 +65,18 @@
             <version>${allure-selenide.version}</version>
         </dependency>
 
-        <dependency>
-            <groupId>net.datafaker</groupId>
-            <artifactId>datafaker</artifactId>
-            <version>${datafaker.version}</version>
-        </dependency>
-
     </dependencies>
 
     <build>
         <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>${maven-surefire-plugin.version}</version>
+                <configuration>
+                  <suiteXmlFiles>./src/test/resources/${testngXML}</suiteXmlFiles>
+                </configuration>
+            </plugin>
             <plugin>
                 <groupId>io.qameta.allure</groupId>
                 <artifactId>allure-maven</artifactId>

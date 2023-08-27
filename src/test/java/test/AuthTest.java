@@ -1,40 +1,39 @@
 package test;
 
 import com.codeborne.selenide.logevents.SelenideLogger;
+import data.TestData;
 import io.qameta.allure.selenide.AllureSelenide;
+import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Test;
 import steps.AuthSteps;
 
 import static com.codeborne.selenide.Configuration.*;
-import static com.codeborne.selenide.Selenide.open;
-import static io.qameta.allure.Allure.step;
 
 public class AuthTest {
 
-    public static String email = "test@protei.ru";
-    public static String password = "test";
 
+// TODO реализовать кросс-браузерное тестирование, добавив переменную browser в .xml
 
+    @BeforeSuite
     public static void setUp() {
         SelenideLogger.addListener("AllureSelenide", new AllureSelenide());
         baseUrl = "file:///C:/Users/4eji4/Downloads/qa-test.html";
         browser = "firefox";
-        holdBrowserOpen = true;
-
-
+        holdBrowserOpen = false;
     }
 
-    @Test
-    public void debug() {
-        AuthSteps authSteps = new AuthSteps();
+    AuthSteps authSteps = new AuthSteps();
 
-        setUp();
-        step("Открыть страницу", () -> open(baseUrl));
-        step("email input", () -> authSteps.inputEmail(email));
-        step("password input", () -> authSteps.inputPassword(password));
-        step("submit",()->authSteps.loginButton());
+//TODO изменить ассерты, передавать в тестовых данных простое, но не лучшее решение
 
+    @Test(dataProvider = "invalidAuthData", dataProviderClass = TestData.class)
+    public void case1 (String email, String password, String error){
+        authSteps.invalidAuth(email, password, error);
     }
 
+    @Test(dataProvider = "validAuthData", dataProviderClass = TestData.class)
+    public void case2 (String email, String password){
+        authSteps.validAuth(email, password);
+    }
 
 }
