@@ -36,6 +36,7 @@ public class FormSteps {
     }
 
 //TODO очень не нравится мне такая реализация, но в 01:56 ничего лучше в голову не пришло. Позже заменю на selectRadio
+//TODO настроить Allure report
 
     public void selectOpt2(String opt2) {
         if (opt2.equals("2.1")) {

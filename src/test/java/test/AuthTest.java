@@ -11,9 +11,9 @@ import static com.codeborne.selenide.Configuration.*;
 
 public class AuthTest {
 
+    AuthSteps authSteps = new AuthSteps();
 
 // TODO реализовать кросс-браузерное тестирование, добавив переменную browser в .xml
-
     @BeforeSuite
     public static void setUp() {
         SelenideLogger.addListener("AllureSelenide", new AllureSelenide());
@@ -21,8 +21,6 @@ public class AuthTest {
         browser = "firefox";
         holdBrowserOpen = false;
     }
-
-    AuthSteps authSteps = new AuthSteps();
 
 //TODO изменить ассерты, передавать в тестовых данных простое, но не лучшее решение
 

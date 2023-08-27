@@ -7,7 +7,6 @@ public class TestData {
     @DataProvider
     public Object[][] invalidAuthData() {
         return new Object[][]{
-//              {"test@protei.ru", "test", ""},
                 {"protei", "test", "Неверный формат E-Mail"},
                 {"test@protei.ru", "", "Неверный E-Mail или пароль"},
                 {"", "test", "Неверный формат E-Mail"},
@@ -22,7 +21,7 @@ public class TestData {
     }
 
     @DataProvider
-    public Object[][] validAuthData() {
+    public static Object[][] validAuthData() {
         return new Object[][]{
                 {"test@protei.ru", "test"}
         };
